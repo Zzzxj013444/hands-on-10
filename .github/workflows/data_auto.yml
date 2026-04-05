@@ -1,0 +1,19 @@
+name: 数据自动化流水线
+on:
+  push:
+    paths:
+      - 'data/**'
+
+jobs:
+  data-process:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: 设置Python环境
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: 安装依赖
+        run: pip install -r requirements.txt
+      - name: 运行数据处理
+        run: python clean_and_merge.py
